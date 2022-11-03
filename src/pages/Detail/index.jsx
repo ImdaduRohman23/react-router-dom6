@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, Outlet, useParams } from 'react-router-dom'
 
 const Detail = () => {
     const {id} = useParams();
@@ -9,7 +9,7 @@ const Detail = () => {
         fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
         .then(res => res.json())
         .then(data => setUser(data))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }, [id])
 
     return (
@@ -18,6 +18,9 @@ const Detail = () => {
             <pre>
                 {JSON.stringify(user, null, 2)}
             </pre>
+            <hr />
+            <Link to='post'>Post</Link> | <Link to='product'>Product</Link>
+            <Outlet />
         </div>
     )
 }
